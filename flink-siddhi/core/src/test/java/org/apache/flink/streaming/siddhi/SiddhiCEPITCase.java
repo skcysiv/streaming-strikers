@@ -521,7 +521,7 @@ public class SiddhiCEPITCase extends AbstractTestBase implements Serializable {
             .union("inputStream2", input2, "id", "name", "price", "timestamp")
             .union("inputStream3", input3, "id", "name", "price", "timestamp")
             .union("inputStream4", input4, "id", "name", "price", "timestamp")
-            .cql(controlStream);
+            .cql(controlStream, new SiddhiCEPConfig(1,1,1,1, false));
 
         String resultPath = tempFolder.newFile().toURI().toString();
         builder.returnAsRow(Arrays.asList("outputStream2", "outputStream3"))

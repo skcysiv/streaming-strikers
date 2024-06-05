@@ -123,7 +123,7 @@ public abstract class SiddhiStream {
          *
          * @return ExecutionSiddhiStream context
          */
-        public ExecutionSiddhiStream cql(DataStream<ControlEvent> controlStream) {
+        public ExecutionSiddhiStream cql(DataStream<ControlEvent> controlStream, SiddhiCEPConfig siddhiCEPConfig) {
             DataStream<Tuple2<StreamRoute, Object>> unionStream = controlStream
                 .map(new NamedControlStream(ControlEvent.DEFAULT_INTERNAL_CONTROL_STREAM))
                 .broadcast()
