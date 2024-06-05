@@ -2,11 +2,14 @@ package com.hackathon.cepservice;
 
 import com.common.model.Event;
 import com.common.model.EventFields;
+import com.common.model.Rule;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hackathon.eventpublisher.RandomEventSource;
 import com.hackathon.eventpublisher.RandomRuleSource;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.FlatMapFunction;
+import org.apache.flink.connector.kafka.sink.KafkaSink;
+import org.apache.flink.connector.kafka.source.KafkaSource;
 import org.apache.flink.streaming.api.TimeCharacteristic;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -14,10 +17,14 @@ import org.apache.flink.streaming.siddhi.SiddhiCEP;
 import org.apache.flink.streaming.siddhi.SiddhiCEPConfig;
 import org.apache.flink.streaming.siddhi.SiddhiStream;
 import org.apache.flink.streaming.siddhi.control.ControlEvent;
+import org.apache.flink.streaming.siddhi.control.MetadataControlEvent;
+import org.apache.flink.streaming.siddhi.control.OperationControlEvent;
 import org.apache.flink.util.Collector;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.osgi.service.component.annotations.Component;
+import com.hackathon.cepservice.kafka.KafkaSinkTarget;
+import com.hackathon.cepservice.kafka.KafkaSourceTarget;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.util.ArrayList;
@@ -73,10 +80,17 @@ public class FlinkEventProcessor {
     public static void process(String[] args) throws Exception {
         int parallelism = 4;
         String jobName = "Streaming-Rule-Engine-1";
-        boolean ruleBasedPartitioning = false;
-
+        boolean ruleBasedPartitioning = true;
+        boolean useKafka = true;
+        if(args.length > 0) {
+            if(args[0].equals("rule-based-partitioning")){
+                ruleBasedPartitioning = true;
+                jobName = "Streaming-Rule-Engine-Partition-With-Rule-1";
+            }
+        }
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
         env.setStreamTimeCharacteristic(TimeCharacteristic.EventTime);
+        DataStream<Event> input1 = null;
         DataStream<ControlEvent> ruleDataStream = null;
         logger.info("Received config: topicProducerName {}, topicConsumerName {}, kafkaBroker {}, groupId {}", topicProducerName, topicConsumerName, kafkaBroker, groupId);
 
@@ -84,10 +98,32 @@ public class FlinkEventProcessor {
                 .<Event>forMonotonousTimestamps()
                 .withTimestampAssigner((event, timestamp) -> Long.parseLong(event.getEventTime()));
 
+        if(useKafka) {
+            KafkaSource<Event> source = KafkaSourceTarget.start(topicConsumerName, kafkaBroker, groupId);
+            KafkaSource<String> ruleSource = KafkaSourceTarget.startRulesSource(ruleTopicConsumerName, kafkaBroker, groupId);
 
-        DataStream<Event> input1 = env.addSource(new RandomEventSource(Integer.MAX_VALUE).closeDelay(1500), "input1").name("events-consumer-1");
+            input1 = env.fromSource(source, watermarkStrategy, "Events Source");
+            input1.print();
+            DataStream<String> ruleString = env.fromSource(ruleSource, WatermarkStrategy.noWatermarks(), "Rules Source");
+            ruleDataStream = ruleString.flatMap(new FlatMapFunction<String, ControlEvent>() {
+                @Override
+                public void flatMap(String s, Collector<ControlEvent> collector) throws Exception {
+                    try {
+                        Rule rule = objectMapper.readValue(s, Rule.class);
+                        MetadataControlEvent controlEvent = MetadataControlEvent.builder().addExecutionPlan(rule.getRuleId().toString(), rule.getQuery()).build();
+                        collector.collect(controlEvent);
+                        OperationControlEvent operationControlEvent = OperationControlEvent.enableQuery(rule.getQuery());
+                        collector.collect(operationControlEvent);
+                        System.out.println("Sent Rule with ruleId: " + rule.getRuleId() +"\nRule: " + rule.toString());
+                    } catch (Exception e){
+                        System.out.println("Got exception while reading rule " + e.getMessage());
+                    }
+                }
+            });
+        } else {
+            input1 = env.addSource(new RandomEventSource(Integer.MAX_VALUE).closeDelay(1500), "input1").name("events-consumer-1");
             ruleDataStream = env.addSource(new RandomRuleSource(), "ruleDataStream").name("rules-consumer");
-
+        }
 
         registerStreams(input1);
 
@@ -108,6 +144,10 @@ public class FlinkEventProcessor {
 
         signal.print();
 
+        if(useKafka) {
+            KafkaSink<String> sink = KafkaSinkTarget.getKafkaSink(topicProducerName, kafkaBroker);
+            signal.sinkTo(sink);
+        }
         env.setMaxParallelism(8);
         env.execute(jobName);
     }
