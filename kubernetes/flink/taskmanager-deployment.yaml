@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: taskmanager
-        image: <image-name>
+        image: shreddersk/streaming-strikers-cep-flink:latest
         imagePullPolicy: Always
         workingDir: /app/flink-1.14.6/
         command: ["/bin/bash", "-c", "/app/flink-1.14.6/bin/taskmanager.sh start; \

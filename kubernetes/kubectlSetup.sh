@@ -1,10 +1,7 @@
 #!/bin/bash
 
 # Define the files for deployment, update, and deletion
-DEPLOY_FILES=("zookeeper-deployment-service.yaml", "./kafka/kafka-deployment-service.yaml", "./schema-registry/schema-registry-pod.yaml", "./flink/flink-configuration-configmap.yaml", "./flink/jobmanager-deployment.yaml", "./flink/jobmanager-rest-service.yaml", "./flink/jobmanager-service.yaml", "./flink/taskmanager-deployment.yaml", "./kafka-data-ingestion/kafka-data-ingestion-deployment.yaml")
 UPDATE_FILES=("update-file1.yaml" "update-file2.yaml")
-DELETE_FILES=("./kafka/zookeeper-deployment-service.yaml", "./kafka/kafka-deployment-service.yaml", "./schema-registry/schema-registry-pod.yaml", "./flink/flink-configuration-configmap.yaml", "./flink/jobmanager-deployment.yaml", "./flink/jobmanager-rest-service.yaml", "./flink/jobmanager-service.yaml", "./flink/taskmanager-deployment.yaml", "./kafka-data-ingestion/kafka-data-ingestion-deployment.yaml")
-DEPLOYMENT=("kafka-data-ingestion-deployment", "flink-taskmanager", "flink-jobmanager", )
 
 create_topics(){
   echo "Trying to create topics in kafka pod"

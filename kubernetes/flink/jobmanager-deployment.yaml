@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: jobmanager
-        image: <image-name>
+        image: shreddersk/streaming-strikers-cep-flink:latest
         workingDir: /app/flink-1.14.6/
         imagePullPolicy: Always
         command: ["/bin/bash", "-c", "/app/flink-1.14.6/bin/jobmanager.sh start;\

@@ -8,8 +8,8 @@ print_usage() {
 
 # Default action
 default_action() {
-    echo "Starting local Flink cluster..."
-    ./bin/start-cluster.sh
+#    echo "Starting local Flink cluster..."
+#    ./bin/start-cluster.sh
 
     if [ -n "$jar_path" ]; then
         echo "Running Flink job from JAR: $jar_path"
@@ -46,8 +46,8 @@ kube_action() {
 
 build_and_push() {
     docker build -t cep-flink .
-    docker tag cep-flink <image-name>
-    docker push <image-name>
+    docker tag cep-flink shreddersk/streaming-strikers-cep-flink:latest
+    docker push shreddersk/streaming-strikers-cep-flink:latest
 }
 
 # Check if no arguments provided
