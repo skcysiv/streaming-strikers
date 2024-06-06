@@ -46,8 +46,8 @@ kube_action() {
 
 build_and_push() {
     docker build -t cep-flink .
-    docker tag cep-flink shreddersk/cep-flink:latest
-    docker push shreddersk/cep-flink:latest
+    docker tag cep-flink <image-name>
+    docker push <image-name>
 }
 
 # Check if no arguments provided

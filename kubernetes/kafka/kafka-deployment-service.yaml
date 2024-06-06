@@ -28,7 +28,7 @@ spec:
     spec:
       containers:
         - name: kafka
-          image: shreddersk/custom-kafka:latest
+          image: <image-name>
 #          command: [ "/bin/sh", "-c" ]
 #          args: [
 #            "kafka-topics.sh --create --topic events-topic --if-not-exists --bootstrap-server kafka:9092 --partitions 1 --replication-factor 1",
