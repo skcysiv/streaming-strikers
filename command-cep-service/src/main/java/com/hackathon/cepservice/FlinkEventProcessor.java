@@ -30,7 +30,7 @@ import org.springframework.beans.factory.annotation.Value;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
+import io.siddhi.extension.execution.unique.DeduplicateStreamProcessor;
 @Component
 public class FlinkEventProcessor {
     private static final Logger logger = LogManager.getLogger(Main.class);
@@ -54,8 +54,10 @@ public class FlinkEventProcessor {
 
     private static final List<DataStream<Event>> eventStreams = new ArrayList<>();
 
-    private static DataStream<Map<String, Object>> initializeSiddhiCEP(String[] stringArray, DataStream<ControlEvent> ruleDataStream, SiddhiCEPConfig siddhiCEPConfig) {
-        SiddhiStream.SingleSiddhiStream<Event> streams = SiddhiCEP
+    private static DataStream<Map<String, Object>> initializeSiddhiCEP(String[] stringArray, DataStream<ControlEvent> ruleDataStream, SiddhiCEPConfig siddhiCEPConfig, StreamExecutionEnvironment env) {
+        SiddhiCEP cep = SiddhiCEP.getSiddhiEnvironment(env);
+        cep.registerExtension("unique:deduplicate", DeduplicateStreamProcessor.class);
+        SiddhiStream.SingleSiddhiStream<Event> streams = cep
                 .define(sourceFilters[0]+"Stream", eventStreams.get(0), stringArray);
         for(int i=1; i < sourceFilters.length; i++){
             streams.union(sourceFilters[i]+"Stream", eventStreams.get(i), stringArray);
@@ -79,13 +81,13 @@ public class FlinkEventProcessor {
 
     public static void process(String[] args) throws Exception {
         int parallelism = 4;
-        String jobName = "Streaming-Rule-Engine-1";
+        String jobName = "Streaming-Rule-Engine";
         boolean ruleBasedPartitioning = true;
         boolean useKafka = true;
         if(args.length > 0) {
             if(args[0].equals("rule-based-partitioning")){
                 ruleBasedPartitioning = true;
-                jobName = "Streaming-Rule-Engine-Partition-With-Rule-1";
+                jobName = "Streaming-Rule-Engine-Partition-With-Rule";
             }
         }
         StreamExecutionEnvironment env = StreamExecutionEnvironment.getExecutionEnvironment();
@@ -111,8 +113,10 @@ public class FlinkEventProcessor {
                     try {
                         Rule rule = objectMapper.readValue(s, Rule.class);
                         MetadataControlEvent controlEvent = MetadataControlEvent.builder().addExecutionPlan(rule.getRuleId().toString(), rule.getQuery()).build();
+                        controlEvent.setSendToPartitionNumber(rule.getSendToPartitionNumber());
                         collector.collect(controlEvent);
                         OperationControlEvent operationControlEvent = OperationControlEvent.enableQuery(rule.getQuery());
+                        operationControlEvent.setSendToPartitionNumber(rule.getSendToPartitionNumber());
                         collector.collect(operationControlEvent);
                         System.out.println("Sent Rule with ruleId: " + rule.getRuleId() +"\nRule: " + rule.toString());
                     } catch (Exception e){
@@ -133,7 +137,7 @@ public class FlinkEventProcessor {
 
         String[] stringArray = fields.toArray(new String[0]);
 
-        DataStream<Map<String, Object>> output = initializeSiddhiCEP(stringArray, ruleDataStream, siddhiCEPConfig);
+        DataStream<Map<String, Object>> output = initializeSiddhiCEP(stringArray, ruleDataStream, siddhiCEPConfig, env);
         DataStream<String> signal = output.flatMap(new FlatMapFunction<Map<String, Object>, String>() {
 
             @Override

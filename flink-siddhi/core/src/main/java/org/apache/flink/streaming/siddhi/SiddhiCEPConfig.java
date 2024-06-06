@@ -1,6 +1,9 @@
 package org.apache.flink.streaming.siddhi;
 
+import org.apache.flink.api.common.functions.Partitioner;
 import org.apache.flink.streaming.siddhi.router.HashPartitioner;
+import org.apache.flink.streaming.siddhi.router.KeyBySelector;
+import org.apache.flink.streaming.siddhi.router.ReduceDuplicateControlEventsFilter;
 
 import java.io.Serializable;
 
@@ -15,6 +18,10 @@ public class SiddhiCEPConfig implements Serializable {
 
     private boolean isRuleBasedPartitioning = false;
 
+    private KeyBySelector keyBySelector;
+
+    private ReduceDuplicateControlEventsFilter reduceDuplicateControlEventsFilter;
+
     private HashPartitioner hashPartitioner;
 
     public SiddhiCEPConfig(int addRouteOperatorParallelism, int abstractSiddhiOperatorParallelism, int controlEventFilterParallelism, int executionPlanAddParallelism, boolean isRuleBasedPartitioning) {
@@ -23,6 +30,11 @@ public class SiddhiCEPConfig implements Serializable {
         this.isRuleBasedPartitioning = isRuleBasedPartitioning;
         this.controlEventFilterParallelism = controlEventFilterParallelism;
         this.executionPlanAddParallelism = executionPlanAddParallelism;
+        if(isRuleBasedPartitioning){
+            this.keyBySelector = new KeyBySelector(this.abstractSiddhiOperatorParallelism);
+            this.reduceDuplicateControlEventsFilter = new ReduceDuplicateControlEventsFilter();
+            this.hashPartitioner = new HashPartitioner();
+        }
     }
 
     public int getAddRouteOperatorParallelism() {
@@ -47,6 +59,22 @@ public class SiddhiCEPConfig implements Serializable {
 
     public void setRuleBasedPartitioning(boolean ruleBasedPartitioning) {
         isRuleBasedPartitioning = ruleBasedPartitioning;
+    }
+
+    public KeyBySelector getKeyBySelector() {
+        return keyBySelector;
+    }
+
+    public void setKeyBySelector(KeyBySelector keyBySelector) {
+        this.keyBySelector = keyBySelector;
+    }
+
+    public ReduceDuplicateControlEventsFilter getReduceDuplicateControlEventsFilter() {
+        return reduceDuplicateControlEventsFilter;
+    }
+
+    public void setReduceDuplicateControlEventsFilter(ReduceDuplicateControlEventsFilter reduceDuplicateControlEventsFilter) {
+        this.reduceDuplicateControlEventsFilter = reduceDuplicateControlEventsFilter;
     }
 
     public HashPartitioner getHashPartitioner() {

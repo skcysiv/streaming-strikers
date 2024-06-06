@@ -20,9 +20,10 @@ package org.apache.flink.streaming.siddhi.utils;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.api.java.tuple.Tuple2;
-import org.apache.flink.streaming.api.datastream.DataStream;
+import org.apache.flink.streaming.siddhi.SiddhiCEPConfig;
 import org.apache.flink.streaming.siddhi.operator.SiddhiOperatorContext;
 import org.apache.flink.streaming.siddhi.operator.SiddhiStreamOperator;
+import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.siddhi.router.StreamRoute;
 
 /**
@@ -30,10 +31,18 @@ import org.apache.flink.streaming.siddhi.router.StreamRoute;
  */
 public class SiddhiStreamFactory {
     @SuppressWarnings("unchecked")
-    public static <OUT> DataStream<OUT> createDataStream(SiddhiOperatorContext context, DataStream<Tuple2<StreamRoute, Object>> namedStream) {
+    public static <OUT> DataStream<OUT> createDataStream(SiddhiOperatorContext context, DataStream<Tuple2<StreamRoute, Object>> namedStream, SiddhiCEPConfig siddhiCEPConfig) {
+        if(siddhiCEPConfig!= null && siddhiCEPConfig.isRuleBasedPartitioning()) {
+            return namedStream.partitionCustom(siddhiCEPConfig.getHashPartitioner(), siddhiCEPConfig.getKeyBySelector()).transform(
+                    context.getName(),
+                    Types.TUPLE(TypeInformation.of(String.class), TypeInformation.of(Object.class)),
+                    new SiddhiStreamOperator(context)).name("abstract-siddhi-operator").setParallelism(siddhiCEPConfig.getAbstractSiddhiOperatorParallelism());
+
+        }
         return namedStream.transform(
-            context.getName(),
-            Types.TUPLE(TypeInformation.of(String.class), TypeInformation.of(Object.class)),
-            new SiddhiStreamOperator(context));
+                context.getName(),
+                Types.TUPLE(TypeInformation.of(String.class), TypeInformation.of(Object.class)),
+                new SiddhiStreamOperator(context)).name("abstract-siddhi-operator");
+//                .setParallelism(siddhiCEPConfig.getAbstractSiddhiOperatorParallelism());
     }
 }
