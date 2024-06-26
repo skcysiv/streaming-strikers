@@ -1,0 +1,44 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kafka
+spec:
+  selector:
+    app: kafka
+  ports:
+    - protocol: TCP
+      port: 9092
+      targetPort: 9092
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: kafka
+spec:
+  serviceName: kafka
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka
+  template:
+    metadata:
+      labels:
+        app: kafka
+    spec:
+      containers:
+        - name: kafka
+          image: shreddersk/streaming-strikers-custom-kafka:latest
+#          command: [ "/bin/sh", "-c" ]
+#          args: [
+#            "kafka-topics.sh --create --topic events-topic --if-not-exists --bootstrap-server kafka:9092 --partitions 1 --replication-factor 1",
+#            "kafka-topics.sh --create --topic rules-topic --if-not-exists --bootstrap-server kafka:9092 --partitions 1 --replication-factor 1",
+#            "kafka-topics.sh --create --topic signals-topic --if-not-exists --bootstrap-server kafka:9092 --partitions 1 --replication-factor 1"
+#          ]
+          ports:
+            - containerPort: 9092
+          env:
+            - name: KAFKA_CFG_ZOOKEEPER_CONNECT
+              value: "zookeeper:2181"
+            - name: KAFKA_ADVERTISED_LISTENERS
+              value: "PLAINTEXT://:9092"

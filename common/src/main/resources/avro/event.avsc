@@ -1,0 +1,2395 @@
+{
+  "namespace": "com.common.model",
+  "type": "record",
+  "name": "Event2",
+  "fields": [
+		{
+            "name": "access_check_results",
+            "type": "string"
+        },
+        {
+            "name": "access_list",
+            "type": "string"
+        },
+        {
+            "name": "access_mask",
+            "type": "string"
+        },
+        {
+            "name": "access_mask_list",
+            "type": "string"
+        },
+        {
+            "name": "access_permission",
+            "type": "string"
+        },
+        {
+            "name": "access_permission_list",
+            "type": "string"
+        },
+        {
+            "name": "access_reason",
+            "type": "string"
+        },
+        {
+            "name": "accesses",
+            "type": "string"
+        },
+        {
+            "name": "account_domain",
+            "type": "string"
+        },
+        {
+            "name": "account_id",
+            "type": "string"
+        },
+        {
+            "name": "account_name",
+            "type": "string"
+        },
+        {
+            "name": "action",
+            "type": "string"
+        },
+        {
+            "name": "activity_id",
+            "type": "string"
+        },
+        {
+            "name": "activity_type",
+            "type": "string"
+        },
+        {
+            "name": "agent_ephemeral_id",
+            "type": "string"
+        },
+        {
+            "name": "agent_host",
+            "type": "string"
+        },
+        {
+            "name": "agent_id",
+            "type": "string"
+        },
+        {
+            "name": "agent_type",
+            "type": "string"
+        },
+        {
+            "name": "alert_id",
+            "type": "string"
+        },
+        {
+            "name": "alert_name",
+            "type": "string"
+        },
+        {
+            "name": "alert_type",
+            "type": "string"
+        },
+        {
+            "name": "allowed_direction",
+            "type": "string"
+        },
+        {
+            "name": "allowed_dst_ip4_range",
+            "type": "string"
+        },
+        {
+            "name": "allowed_dst_port_range",
+            "type": "string"
+        },
+        {
+            "name": "allowed_ip4_range",
+            "type": "string"
+        },
+        {
+            "name": "allowed_ports",
+            "type": "string"
+        },
+        {
+            "name": "allowed_protos",
+            "type": "string"
+        },
+        {
+            "name": "allowed_src_ip4_range",
+            "type": "string"
+        },
+        {
+            "name": "allowed_src_port_range",
+            "type": "string"
+        },
+        {
+            "name": "application",
+            "type": "string"
+        },
+        {
+            "name": "application_category",
+            "type": "string"
+        },
+        {
+            "name": "application_id",
+            "type": "string"
+        },
+        {
+            "name": "application_name",
+            "type": "string"
+        },
+        {
+            "name": "arn_role",
+            "type": "string"
+        },
+        {
+            "name": "article_number",
+            "type": "int"
+        },
+        {
+            "name": "asn",
+            "type": "int"
+        },
+        {
+            "name": "attachment",
+            "type": "string"
+        },
+        {
+            "name": "audit_change",
+            "type": "string"
+        },
+        {
+            "name": "auth_action",
+            "type": "string"
+        },
+        {
+            "name": "authentication_package",
+            "type": "string"
+        },
+        {
+            "name": "authentication_type",
+            "type": "string"
+        },
+        {
+            "name": "authentication_requirement",
+            "type": "string"
+        },
+        {
+            "name": "authorization",
+            "type": "string"
+        },
+        {
+            "name": "authorization_permission",
+            "type": "string"
+        },
+        {
+            "name": "authorization_service",
+            "type": "string"
+        },
+        {
+            "name": "authorization_user",
+            "type": "string"
+        },
+        {
+            "name": "average",
+            "type": "float"
+        },
+        {
+            "name": "aws_role",
+            "type": "string"
+        },
+        {
+            "name": "blocked_ports",
+            "type": "int"
+        },
+        {
+            "name": "blocked_protocol",
+            "type": "string"
+        },
+        {
+            "name": "breach_score",
+            "type": "string"
+        },
+        {
+            "name": "bucket_member",
+            "type": "string"
+        },
+        {
+            "name": "bucket_name",
+            "type": "string"
+        },
+        {
+            "name": "bucket_role",
+            "type": "string"
+        },
+        {
+            "name": "business_unit",
+            "type": "int"
+        },
+        {
+            "name": "bytes_in",
+            "type": "int"
+        },
+        {
+            "name": "bytes_out",
+            "type": "int"
+        },
+        {
+            "name": "caller_process_id",
+            "type": "string"
+        },
+        {
+            "name": "caller_process_name",
+            "type": "string"
+        },
+        {
+            "name": "card_store_id",
+            "type": "int"
+        },
+        {
+            "name": "cash_register_id",
+            "type": "int"
+        },
+        {
+            "name": "channel",
+            "type": "string"
+        },
+        {
+            "name": "client_application",
+            "type": "string"
+        },
+        {
+            "name": "client_application_id",
+            "type": "string"
+        },
+        {
+            "name": "client_creation_time",
+            "type": "string"
+        },
+        {
+            "name": "client_process_id",
+            "type": "string"
+        },
+        {
+            "name": "client_version",
+            "type": "string"
+        },
+        {
+            "name": "client_id",
+            "type": "int"
+        },
+        {
+            "name": "cloud_action",
+            "type": "string"
+        },
+        {
+            "name": "cloud_availability_zone",
+            "type": "string"
+        },
+        {
+            "name": "cloud_instance_id",
+            "type": "string"
+        },
+        {
+            "name": "cloud_instance_name",
+            "type": "string"
+        },
+        {
+            "name": "cloud_project_name",
+            "type": "string"
+        },
+        {
+            "name": "cloud_provider",
+            "type": "string"
+        },
+        {
+            "name": "cloud_member",
+            "type": "string"
+        },
+        {
+            "name": "cloud_role",
+            "type": "string"
+        },
+        {
+            "name": "cloud_storage_bucket",
+            "type": "string"
+        },
+        {
+            "name": "cluster_name",
+            "type": "string"
+        },
+        {
+            "name": "commandline",
+            "type": "string"
+        },
+        {
+            "name": "commandline_argument",
+            "type": "string"
+        },
+        {
+            "name": "commandline_decoded",
+            "type": "string"
+        },
+        {
+            "name": "company",
+            "type": "string"
+        },
+        {
+            "name": "confidence",
+            "type": "string"
+        },
+        {
+            "name": "connector_data_source_id",
+            "type": "string"
+        },
+        {
+            "name": "connector_id",
+            "type": "string"
+        },
+        {
+            "name": "container_name",
+            "type": "string"
+        },
+        {
+            "name": "content_length",
+            "type": "int"
+        },
+        {
+            "name": "content_type",
+            "type": "string"
+        },
+        {
+            "name": "correlation_guid",
+            "type": "string"
+        },
+        {
+            "name": "count",
+            "type": "int"
+        },
+        {
+            "name": "country_code",
+            "type": "string"
+        },
+        {
+            "name": "conditional_access_status",
+            "type": "string"
+        },
+        {
+            "name": "cpu_cores",
+            "type": "int"
+        },
+        {
+            "name": "cpu_pct",
+            "type": "float"
+        },
+        {
+            "name": "cpu_quota",
+            "type": "string"
+        },
+        {
+            "name": "creation_time",
+            "type": "string"
+        },
+        {
+            "name": "current_directory",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_correlation_id",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_deprecated_port",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_development_mode_original_message",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_duplicate_original_message",
+            "type": "boolean"
+        },
+        {
+            "name": "cysiv_eda",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_enrichment",
+            "type": "boolean"
+        },
+        {
+            "name": "cysiv_enrichment_id",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_fields",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_loggify_error",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_metadata",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_original_message",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_other",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_size_error",
+            "type": "boolean"
+        },
+        {
+            "name": "cysiv_skipped_by",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_time_error",
+            "type": "boolean"
+        },
+        {
+            "name": "cysiv_time_error_original_event_time",
+            "type": "string"
+        },
+        {
+            "name": "cysiv_string",
+            "type": "string"
+        },
+        {
+            "name": "data_source",
+            "type": "string"
+        },
+        {
+            "name": "data_source_category",
+            "type": "string"
+        },
+        {
+            "name": "data_source_collector",
+            "type": "string"
+        },
+        {
+            "name": "data_source_subcategory",
+            "type": "string"
+        },
+        {
+            "name": "detection_method",
+            "type": "string"
+        },
+        {
+            "name": "detection_name",
+            "type": "string"
+        },
+        {
+            "name": "detection_type",
+            "type": "string"
+        },
+        {
+            "name": "direction",
+            "type": "string"
+        },
+        {
+            "name": "disk_name",
+            "type": "string"
+        },
+        {
+            "name": "disk_pct",
+            "type": "float"
+        },
+        {
+            "name": "dlp_result",
+            "type": "string"
+        },
+        {
+            "name": "dns_query",
+            "type": "string"
+        },
+        {
+            "name": "dns_query_class",
+            "type": "string"
+        },
+        {
+            "name": "dns_query_type",
+            "type": "string"
+        },
+        {
+            "name": "dns_server",
+            "type": "string"
+        },
+        {
+            "name": "domain_name",
+            "type": "string"
+        },
+        {
+            "name": "dst_city",
+            "type": "string"
+        },
+        {
+            "name": "dst_country",
+            "type": "string"
+        },
+        {
+            "name": "dst_domain",
+            "type": "string"
+        },
+        {
+            "name": "dst_file_extension",
+            "type": "string"
+        },
+        {
+            "name": "dst_file_name",
+            "type": "string"
+        },
+        {
+            "name": "dst_file_url",
+            "type": "string"
+        },
+        {
+            "name": "dst_folder_id",
+            "type": "string"
+        },
+        {
+            "name": "dst_folder_path",
+            "type": "string"
+        },
+        {
+            "name": "dst_host",
+            "type": "string"
+        },
+        {
+            "name": "dst_host_fqdn",
+            "type": "string"
+        },
+        {
+            "name": "dst_ip4",
+            "type": "string"
+        },
+        {
+            "name": "dst_ip6",
+            "type": "string"
+        },
+        {
+            "name": "dst_lat_lon",
+            "type": "string"
+        },
+        {
+            "name": "dst_asn",
+            "type": "int"
+        },
+        {
+            "name": "dst_asn_org",
+            "type": "string"
+        },
+        {
+            "name": "dst_mac",
+            "type": "string"
+        },
+        {
+            "name": "dst_port",
+            "type": "int"
+        },
+        {
+            "name": "dst_port_name",
+            "type": "string"
+        },
+        {
+            "name": "dst_tenant_guid",
+            "type": "string"
+        },
+        {
+            "name": "dst_user_name",
+            "type": "string"
+        },
+        {
+            "name": "dst_user_type",
+            "type": "string"
+        },
+        {
+            "name": "dst_zone",
+            "type": "string"
+        },
+        {
+            "name": "duration",
+            "type": "int"
+        },
+        {
+            "name": "dvc_host",
+            "type": "string"
+        },
+        {
+            "name": "dvc_host_fqdn",
+            "type": "string"
+        },
+        {
+            "name": "dvc_id",
+            "type": "string"
+        },
+        {
+            "name": "dvc_ip4",
+            "type": "string"
+        },
+        {
+            "name": "dvc_ip6",
+            "type": "string"
+        },
+        {
+            "name": "dvc_location",
+            "type": "string"
+        },
+        {
+            "name": "dvc_mac",
+            "type": "string"
+        },
+        {
+            "name": "dvc_module",
+            "type": "string"
+        },
+        {
+            "name": "dvc_product",
+            "type": "string"
+        },
+        {
+            "name": "dvc_vendor",
+            "type": "string"
+        },
+        {
+            "name": "elevated_token",
+            "type": "string"
+        },
+        {
+            "name": "elevated_token_type",
+            "type": "string"
+        },
+        {
+            "name": "encryption_type",
+            "type": "string"
+        },
+        {
+            "name": "end_time",
+            "type": "string"
+        },
+        {
+            "name": "enrichment_read",
+            "type": "string"
+        },
+        {
+            "name": "enrichment_src",
+            "type": "string"
+        },
+        {
+            "name": "enrichment_write",
+            "type": "string"
+        },
+        {
+            "name": "entity_id",
+            "type": "string"
+        },
+        {
+            "name": "entity_type",
+            "type": "string"
+        },
+        {
+            "name": "error",
+            "type": "string"
+        },
+        {
+            "name": "error_code",
+            "type": "string"
+        },
+        {
+            "name": "event_category",
+            "type": "string"
+        },
+        {
+            "name": "event_context",
+            "type": "string"
+        },
+        {
+            "name": "event_count",
+            "type": "int"
+        },
+        {
+            "name": "event_description",
+            "type": "string"
+        },
+        {
+            "name": "event_details",
+            "type": "string"
+        },
+        {
+            "name": "event_guid",
+            "type": "string"
+        },
+        {
+            "name": "event_id",
+            "type": "int"
+        },
+        {
+            "name": "event_label",
+            "type": "string"
+        },
+        {
+            "name": "event_name",
+            "type": "string"
+        },
+        {
+            "name": "event_properties",
+            "type": "string"
+        },
+        {
+            "name": "event_sub_category",
+            "type": "string"
+        },
+        {
+            "name": "event_sub_type",
+            "type": "string"
+        },
+        {
+            "name": "event_time",
+            "type": "string"
+        },
+        {
+            "name": "event_type",
+            "type": "string"
+        },
+        {
+            "name": "exploitability_index",
+            "type": "string"
+        },
+        {
+            "name": "failure_reason",
+            "type": "string"
+        },
+        {
+            "name": "file_directory",
+            "type": "string"
+        },
+        {
+            "name": "file_directory_path",
+            "type": "string"
+        },
+        {
+            "name": "file_hash",
+            "type": "string"
+        },
+        {
+            "name": "file_hash_imphash",
+            "type": "string"
+        },
+        {
+            "name": "file_hash_md5",
+            "type": "string"
+        },
+        {
+            "name": "file_hash_sha1",
+            "type": "string"
+        },
+        {
+            "name": "file_hash_sha2",
+            "type": "string"
+        },
+        {
+            "name": "file_hash_sha256",
+            "type": "string"
+        },
+        {
+            "name": "file_id",
+            "type": "string"
+        },
+        {
+            "name": "file_last_modified_by",
+            "type": "string"
+        },
+        {
+            "name": "file_last_modified_date",
+            "type": "string"
+        },
+        {
+            "name": "file_name",
+            "type": "string"
+        },
+        {
+            "name": "file_path",
+            "type": "string"
+        },
+        {
+            "name": "file_service",
+            "type": "string"
+        },
+        {
+            "name": "file_size",
+            "type": "int"
+        },
+        {
+            "name": "file_type",
+            "type": "string"
+        },
+        {
+            "name": "file_version",
+            "type": "string"
+        },
+        {
+            "name": "filter_error",
+            "type": "string"
+        },
+        {
+            "name": "filter_rtid",
+            "type": "string"
+        },
+        {
+            "name": "filter_version",
+            "type": "string"
+        },
+        {
+            "name": "gift_card_store_id",
+            "type": "int"
+        },
+        {
+            "name": "giftcard_id",
+            "type": "string"
+        },
+        {
+            "name": "granted_access",
+            "type": "string"
+        },
+        {
+            "name": "group_name",
+            "type": "string"
+        },
+        {
+            "name": "health_alert_volume",
+            "type": "string"
+        },
+        {
+            "name": "host_severity",
+            "type": "string"
+        },
+        {
+            "name": "http_headers",
+            "type": "string"
+        },
+        {
+            "name": "http_host",
+            "type": "string"
+        },
+        {
+            "name": "http_method",
+            "type": "string"
+        },
+        {
+            "name": "http_referer",
+            "type": "string"
+        },
+        {
+            "name": "http_status",
+            "type": "int"
+        },
+        {
+            "name": "icmp_code",
+            "type": "int"
+        },
+        {
+            "name": "icmp_type",
+            "type": "int"
+        },
+        {
+            "name": "identity",
+            "type": "string"
+        },
+        {
+            "name": "index_time",
+            "type": "string"
+        },
+        {
+            "name": "image_loaded",
+            "type": "string"
+        },
+        {
+            "name": "impersonation_level",
+            "type": "string"
+        },
+        {
+            "name": "insert_id",
+            "type": "string"
+        },
+        {
+            "name": "instance_id",
+            "type": "string"
+        },
+        {
+            "name": "instance_type",
+            "type": "string"
+        },
+        {
+            "name": "integrity_level",
+            "type": "string"
+        },
+        {
+            "name": "interface_in",
+            "type": "string"
+        },
+        {
+            "name": "interface_out",
+            "type": "string"
+        },
+        {
+            "name": "is_all_ports",
+            "type": "boolean"
+        },
+        {
+            "name": "is_authorization_granted",
+            "type": "boolean"
+        },
+        {
+            "name": "is_bypassed",
+            "type": "boolean"
+        },
+        {
+            "name": "is_encrypted",
+            "type": "boolean"
+        },
+        {
+            "name": "is_fw_enabled",
+            "type": "boolean"
+        },
+        {
+            "name": "is_initiated",
+            "type": "boolean"
+        },
+        {
+            "name": "is_policy_applied",
+            "type": "boolean"
+        },
+        {
+            "name": "is_read_only",
+            "type": "boolean"
+        },
+        {
+            "name": "is_signed",
+            "type": "boolean"
+        },
+        {
+            "name": "is_storage_backup_enabled",
+            "type": "boolean"
+        },
+        {
+            "name": "is_suspicious",
+            "type": "boolean"
+        },
+        {
+            "name": "is_password_modified",
+            "type": "string"
+        },
+        {
+            "name": "key_length",
+            "type": "int"
+        },
+        {
+            "name": "keyword",
+            "type": "string"
+        },
+        {
+            "name": "kill_chain_stage",
+            "type": "string"
+        },
+        {
+            "name": "library_loaded",
+            "type": "string"
+        },
+        {
+            "name": "listener_name",
+            "type": "string"
+        },
+        {
+            "name": "lm_package",
+            "type": "string"
+        },
+        {
+            "name": "location",
+            "type": "string"
+        },
+        {
+            "name": "log_level",
+            "type": "string"
+        },
+        {
+            "name": "log_name",
+            "type": "string"
+        },
+        {
+            "name": "log_source",
+            "type": "string"
+        },
+        {
+            "name": "log_type",
+            "type": "string"
+        },
+        {
+            "name": "login",
+            "type": "string"
+        },
+        {
+            "name": "logon_guid",
+            "type": "string"
+        },
+        {
+            "name": "logon_id",
+            "type": "string"
+        },
+        {
+            "name": "logon_process_id",
+            "type": "string"
+        },
+        {
+            "name": "logon_process_name",
+            "type": "string"
+        },
+        {
+            "name": "logon_status",
+            "type": "string"
+        },
+        {
+            "name": "logon_type",
+            "type": "string"
+        },
+        {
+            "name": "logon_user",
+            "type": "string"
+        },
+        {
+            "name": "mail_address",
+            "type": "string"
+        },
+        {
+            "name": "mail_attachment",
+            "type": "string"
+        },
+        {
+            "name": "mail_click_ip4",
+            "type": "string"
+        },
+        {
+            "name": "mail_click_ip6",
+            "type": "string"
+        },
+        {
+            "name": "mail_client",
+            "type": "string"
+        },
+        {
+            "name": "mail_cluster",
+            "type": "string"
+        },
+        {
+            "name": "mail_exchange_id",
+            "type": "string"
+        },
+        {
+            "name": "mail_guid",
+            "type": "string"
+        },
+        {
+            "name": "mail_guid_send_as",
+            "type": "string"
+        },
+        {
+            "name": "mail_header_from",
+            "type": "string"
+        },
+        {
+            "name": "mail_header_reply_to",
+            "type": "string"
+        },
+        {
+            "name": "mail_header_to",
+            "type": "string"
+        },
+        {
+            "name": "mail_host",
+            "type": "string"
+        },
+        {
+            "name": "mail_msg_id",
+            "type": "string"
+        },
+        {
+            "name": "mail_recipient",
+            "type": "string"
+        },
+        {
+            "name": "mail_reply_to",
+            "type": "string"
+        },
+        {
+            "name": "mail_send_as",
+            "type": "string"
+        },
+        {
+            "name": "mail_sender",
+            "type": "string"
+        },
+        {
+            "name": "mail_sender_display",
+            "type": "string"
+        },
+        {
+            "name": "mail_sender_ip4",
+            "type": "string"
+        },
+        {
+            "name": "mail_sender_ip6",
+            "type": "string"
+        },
+        {
+            "name": "mail_sent_time",
+            "type": "string"
+        },
+        {
+            "name": "mail_sid",
+            "type": "string"
+        },
+        {
+            "name": "mail_subject",
+            "type": "string"
+        },
+        {
+            "name": "mail_threats",
+            "type": "string"
+        },
+        {
+            "name": "mail_threat_time",
+            "type": "string"
+        },
+        {
+            "name": "mail_url_click_time",
+            "type": "string"
+        },
+        {
+            "name": "mail_urls",
+            "type": "string"
+        },
+        {
+            "name": "mail_user",
+            "type": "string"
+        },
+        {
+            "name": "mail_verdict",
+            "type": "string"
+        },
+        {
+            "name": "mail_version",
+            "type": "string"
+        },
+        {
+            "name": "major_media_type",
+            "type": "string"
+        },
+        {
+            "name": "malware_category",
+            "type": "string"
+        },
+        {
+            "name": "malware_family",
+            "type": "string"
+        },
+        {
+            "name": "malware_name",
+            "type": "string"
+        },
+        {
+            "name": "memory_pct",
+            "type": "float"
+        },
+        {
+            "name": "message",
+            "type": "string"
+        },
+        {
+            "name": "message_id",
+            "type": "string"
+        },
+        {
+            "name": "message_number",
+            "type": "int"
+        },
+        {
+            "name": "method_name",
+            "type": "string"
+        },
+        {
+            "name": "mfa_enabled",
+            "type": "string"
+        },
+        {
+            "name": "minor_media_type",
+            "type": "string"
+        },
+        {
+            "name": "mitre_tactic",
+            "type": "string"
+        },
+        {
+            "name": "mitre_technique",
+            "type": "string"
+        },
+        {
+            "name": "mount_path",
+            "type": "string"
+        },
+        {
+            "name": "nat_ip4",
+            "type": "string"
+        },
+        {
+            "name": "nat_ip6",
+            "type": "string"
+        },
+        {
+            "name": "nat_port",
+            "type": "int"
+        },
+        {
+            "name": "network_name",
+            "type": "string"
+        },
+        {
+            "name": "network_names",
+            "type": "string"
+        },
+        {
+            "name": "network_types",
+            "type": "string"
+        },
+        {
+            "name": "new_process_id",
+            "type": "string"
+        },
+        {
+            "name": "new_thread_id",
+            "type": "string"
+        },
+        {
+            "name": "num_connections",
+            "type": "int"
+        },
+        {
+            "name": "num_rows",
+            "type": "int"
+        },
+        {
+            "name": "object_name",
+            "type": "string"
+        },
+        {
+            "name": "object_server",
+            "type": "string"
+        },
+        {
+            "name": "object_type",
+            "type": "string"
+        },
+        {
+            "name": "op_code",
+            "type": "string"
+        },
+        {
+            "name": "operation_name",
+            "type": "string"
+        },
+        {
+            "name": "operation_type",
+            "type": "string"
+        },
+        {
+            "name": "original_file_name",
+            "type": "string"
+        },
+        {
+            "name": "original_message",
+            "type": "string"
+        },
+        {
+            "name": "original_message_size",
+            "type": "int"
+        },
+        {
+            "name": "os",
+            "type": "string"
+        },
+        {
+            "name": "os_architecture",
+            "type": "string"
+        },
+        {
+            "name": "os_name",
+            "type": "string"
+        },
+        {
+            "name": "os_platform",
+            "type": "string"
+        },
+        {
+            "name": "os_type",
+            "type": "string"
+        },
+        {
+            "name": "os_version",
+            "type": "string"
+        },
+        {
+            "name": "owner",
+            "type": "string"
+        },
+        {
+            "name": "package_name",
+            "type": "string"
+        },
+        {
+            "name": "packets_in",
+            "type": "int"
+        },
+        {
+            "name": "packets_out",
+            "type": "int"
+        },
+        {
+            "name": "parent_file_hash",
+            "type": "string"
+        },
+        {
+            "name": "parent_file_md5",
+            "type": "string"
+        },
+        {
+            "name": "parent_file_sha1",
+            "type": "string"
+        },
+        {
+            "name": "parent_file_sha256",
+            "type": "string"
+        },
+        {
+            "name": "parent_process",
+            "type": "string"
+        },
+        {
+            "name": "parent_process_commandline",
+            "type": "string"
+        },
+        {
+            "name": "parent_process_commandline_decoded",
+            "type": "string"
+        },
+        {
+            "name": "parent_process_guid",
+            "type": "string"
+        },
+        {
+            "name": "parent_process_id",
+            "type": "string"
+        },
+        {
+            "name": "parent_process_name",
+            "type": "string"
+        },
+        {
+            "name": "parent_process_path",
+            "type": "string"
+        },
+        {
+            "name": "payload",
+            "type": "string"
+        },
+        {
+            "name": "payment_amount",
+            "type": "float"
+        },
+        {
+            "name": "payment_id",
+            "type": "int"
+        },
+        {
+            "name": "payment_method",
+            "type": "string"
+        },
+        {
+            "name": "permission",
+            "type": "string"
+        },
+        {
+            "name": "pipe_name",
+            "type": "string"
+        },
+        {
+            "name": "pod_name",
+            "type": "string"
+        },
+        {
+            "name": "policy_name",
+            "type": "string"
+        },
+        {
+            "name": "policy_type",
+            "type": "string"
+        },
+        {
+            "name": "previous_creation_time",
+            "type": "string"
+        },
+        {
+            "name": "principal_id",
+            "type": "string"
+        },
+        {
+            "name": "prior_file_name",
+            "type": "string"
+        },
+        {
+            "name": "priority",
+            "type": "string"
+        },
+        {
+            "name": "privilege_list",
+            "type": "string"
+        },
+        {
+            "name": "process_call_trace",
+            "type": "string"
+        },
+        {
+            "name": "process_guid",
+            "type": "string"
+        },
+        {
+            "name": "process_id",
+            "type": "string"
+        },
+        {
+            "name": "process_name",
+            "type": "string"
+        },
+        {
+            "name": "process_path",
+            "type": "string"
+        },
+        {
+            "name": "process_thread_id",
+            "type": "string"
+        },
+        {
+            "name": "process_working_directory",
+            "type": "string"
+        },
+        {
+            "name": "product",
+            "type": "string"
+        },
+        {
+            "name": "project_id",
+            "type": "string"
+        },
+        {
+            "name": "protocol",
+            "type": "string"
+        },
+        {
+            "name": "provider_guid",
+            "type": "string"
+        },
+        {
+            "name": "provider_name",
+            "type": "string"
+        },
+        {
+            "name": "provider_path",
+            "type": "string"
+        },
+        {
+            "name": "query",
+            "type": "string"
+        },
+        {
+            "name": "query_name",
+            "type": "string"
+        },
+        {
+            "name": "query_type",
+            "type": "string"
+        },
+        {
+            "name": "read_operation",
+            "type": "string"
+        },
+        {
+            "name": "reason",
+            "type": "string"
+        },
+        {
+            "name": "reason_code",
+            "type": "string"
+        },
+        {
+            "name": "record_id",
+            "type": "string"
+        },
+        {
+            "name": "record_type",
+            "type": "string"
+        },
+        {
+            "name": "reference_url",
+            "type": "string"
+        },
+        {
+            "name": "registry_key",
+            "type": "string"
+        },
+        {
+            "name": "registry_value",
+            "type": "string"
+        },
+        {
+            "name": "relative_target_name",
+            "type": "string"
+        },
+        {
+            "name": "remote_network_name",
+            "type": "string"
+        },
+        {
+            "name": "remote_vm_name",
+            "type": "string"
+        },
+        {
+            "name": "remote_vpc_name",
+            "type": "string"
+        },
+        {
+            "name": "report_cols",
+            "type": "string"
+        },
+        {
+            "name": "req_access_grantee_uri",
+            "type": "string"
+        },
+        {
+            "name": "req_perm_from_port",
+            "type": "int"
+        },
+        {
+            "name": "req_perm_to_port",
+            "type": "int"
+        },
+        {
+            "name": "req_project_id",
+            "type": "string"
+        },
+        {
+            "name": "request_auth",
+            "type": "string"
+        },
+        {
+            "name": "request_bytes",
+            "type": "int"
+        },
+        {
+            "name": "request_description",
+            "type": "string"
+        },
+        {
+            "name": "request_instance",
+            "type": "string"
+        },
+        {
+            "name": "request_length",
+            "type": "int"
+        },
+        {
+            "name": "request_method",
+            "type": "string"
+        },
+        {
+            "name": "request_name",
+            "type": "string"
+        },
+        {
+            "name": "request_os",
+            "type": "string"
+        },
+        {
+            "name": "request_priority",
+            "type": "string"
+        },
+        {
+            "name": "request_project",
+            "type": "string"
+        },
+        {
+            "name": "request_project_id",
+            "type": "string"
+        },
+        {
+            "name": "request_query",
+            "type": "string"
+        },
+        {
+            "name": "request_type",
+            "type": "string"
+        },
+        {
+            "name": "request_url",
+            "type": "string"
+        },
+        {
+            "name": "resource",
+            "type": "string"
+        },
+        {
+            "name": "resource_id",
+            "type": "string"
+        },
+        {
+            "name": "resource_name",
+            "type": "string"
+        },
+        {
+            "name": "resource_provider",
+            "type": "string"
+        },
+        {
+            "name": "resource_type",
+            "type": "string"
+        },
+        {
+            "name": "resource_zone",
+            "type": "string"
+        },
+        {
+            "name": "resp_arn",
+            "type": "string"
+        },
+        {
+            "name": "resp_instance_id",
+            "type": "string"
+        },
+        {
+            "name": "resp_instance_type",
+            "type": "string"
+        },
+        {
+            "name": "response_code",
+            "type": "string"
+        },
+        {
+            "name": "response_data",
+            "type": "string"
+        },
+        {
+            "name": "response_dataset_id",
+            "type": "string"
+        },
+        {
+            "name": "response_description",
+            "type": "string"
+        },
+        {
+            "name": "response_groups",
+            "type": "string"
+        },
+        {
+            "name": "response_link",
+            "type": "string"
+        },
+        {
+            "name": "response_mcs",
+            "type": "string"
+        },
+        {
+            "name": "response_name",
+            "type": "string"
+        },
+        {
+            "name": "response_namespace",
+            "type": "string"
+        },
+        {
+            "name": "response_parent_project",
+            "type": "string"
+        },
+        {
+            "name": "response_project",
+            "type": "string"
+        },
+        {
+            "name": "response_requester",
+            "type": "string"
+        },
+        {
+            "name": "response_spec",
+            "type": "string"
+        },
+        {
+            "name": "response_status",
+            "type": "string"
+        },
+        {
+            "name": "response_type",
+            "type": "string"
+        },
+        {
+            "name": "response_zone",
+            "type": "string"
+        },
+        {
+            "name": "restricted_admin_mode",
+            "type": "string"
+        },
+        {
+            "name": "result",
+            "type": "string"
+        },
+        {
+            "name": "result_code",
+            "type": "string"
+        },
+        {
+            "name": "return_code",
+            "type": "string"
+        },
+        {
+            "name": "risk_level",
+            "type": "string"
+        },
+        {
+            "name": "role_name",
+            "type": "string"
+        },
+        {
+            "name": "rule_context",
+            "type": "string"
+        },
+        {
+            "name": "rule_id",
+            "type": "string"
+        },
+        {
+            "name": "rule_name",
+            "type": "string"
+        },
+        {
+            "name": "rule_ids",
+            "type": "string"
+        },
+        {
+            "name": "resource_account_id",
+            "type": "string"
+        },
+        {
+            "name": "scan_type",
+            "type": "string"
+        },
+        {
+            "name": "scheduledtask_process_id",
+            "type": "string"
+        },
+        {
+            "name": "schema_friendly_name",
+            "type": "string"
+        },
+        {
+            "name": "script_block_id",
+            "type": "string"
+        },
+        {
+            "name": "script_block_text",
+            "type": "string"
+        },
+        {
+            "name": "sale_id",
+            "type": "string"
+        },
+        {
+            "name": "sender",
+            "type": "string"
+        },
+        {
+            "name": "server_name",
+            "type": "string"
+        },
+        {
+            "name": "service_name",
+            "type": "string"
+        },
+        {
+            "name": "service_state",
+            "type": "string"
+        },
+        {
+            "name": "service_type",
+            "type": "string"
+        },
+        {
+            "name": "service_status",
+            "type": "string"
+        },
+        {
+            "name": "session_account_id",
+            "type": "string"
+        },
+        {
+            "name": "session_id",
+            "type": "string"
+        },
+        {
+            "name": "severity",
+            "type": "string"
+        },
+        {
+            "name": "severity_id",
+            "type": "int"
+        },
+        {
+            "name": "severity_level",
+            "type": "string"
+        },
+        {
+            "name": "share_name",
+            "type": "string"
+        },
+        {
+            "name": "share_path",
+            "type": "string"
+        },
+        {
+            "name": "shared_event_id",
+            "type": "string"
+        },
+        {
+            "name": "signature",
+            "type": "string"
+        },
+        {
+            "name": "signed_by",
+            "type": "string"
+        },
+        {
+            "name": "site_name",
+            "type": "string"
+        },
+        {
+            "name": "src_user_id",
+            "type": "string"
+        },
+        {
+            "name": "src_city",
+            "type": "string"
+        },
+        {
+            "name": "src_compliance_pct",
+            "type": "float"
+        },
+        {
+            "name": "src_country",
+            "type": "string"
+        },
+        {
+            "name": "src_domain",
+            "type": "string"
+        },
+        {
+            "name": "src_file_extension",
+            "type": "string"
+        },
+        {
+            "name": "src_file_name",
+            "type": "string"
+        },
+        {
+            "name": "src_file_url",
+            "type": "string"
+        },
+        {
+            "name": "src_folder_id",
+            "type": "string"
+        },
+        {
+            "name": "src_folder_path",
+            "type": "string"
+        },
+        {
+            "name": "src_host",
+            "type": "string"
+        },
+        {
+            "name": "src_host_fqdn",
+            "type": "string"
+        },
+        {
+            "name": "src_id",
+            "type": "string"
+        },
+        {
+            "name": "src_ip4",
+            "type": "string"
+        },
+        {
+            "name": "src_ip6",
+            "type": "string"
+        },
+        {
+            "name": "src_lat_lon",
+            "type": "string"
+        },
+        {
+            "name": "src_asn_org",
+            "type": "string"
+        },
+        {
+            "name": "src_mac",
+            "type": "string"
+        },
+        {
+            "name": "src_model",
+            "type": "string"
+        },
+        {
+            "name": "src_os",
+            "type": "string"
+        },
+        {
+            "name": "src_port",
+            "type": "int"
+        },
+        {
+            "name": "src_process",
+            "type": "string"
+        },
+        {
+            "name": "src_process_guid",
+            "type": "string"
+        },
+        {
+            "name": "src_process_id",
+            "type": "string"
+        },
+        {
+            "name": "src_region",
+            "type": "string"
+        },
+        {
+            "name": "src_state",
+            "type": "string"
+        },
+        {
+            "name": "src_tenant_guid",
+            "type": "string"
+        },
+        {
+            "name": "src_thread_id",
+            "type": "string"
+        },
+        {
+            "name": "src_type",
+            "type": "string"
+        },
+        {
+            "name": "src_vendor",
+            "type": "string"
+        },
+        {
+            "name": "src_zone",
+            "type": "string"
+        },
+        {
+            "name": "start_function",
+            "type": "string"
+        },
+        {
+            "name": "start_module",
+            "type": "string"
+        },
+        {
+            "name": "start_time",
+            "type": "string"
+        },
+        {
+            "name": "start_type",
+            "type": "string"
+        },
+        {
+            "name": "status",
+            "type": "string"
+        },
+        {
+            "name": "status_code",
+            "type": "string"
+        },
+        {
+            "name": "store_id",
+            "type": "int"
+        },
+        {
+            "name": "subject_user_name",
+            "type": "string"
+        },
+        {
+            "name": "subscription_id",
+            "type": "string"
+        },
+        {
+            "name": "sum_cheq",
+            "type": "int"
+        },
+        {
+            "name": "tags",
+            "type": "string"
+        },
+        {
+            "name": "target_domain",
+            "type": "string"
+        },
+        {
+            "name": "target_domain_name",
+            "type": "string"
+        },
+        {
+            "name": "target_file_name",
+            "type": "string"
+        },
+        {
+            "name": "target_info",
+            "type": "string"
+        },
+        {
+            "name": "target_linked_logon_id",
+            "type": "string"
+        },
+        {
+            "name": "target_logon_guid",
+            "type": "string"
+        },
+        {
+            "name": "target_logon_id",
+            "type": "string"
+        },
+        {
+            "name": "target_name",
+            "type": "string"
+        },
+        {
+            "name": "target_object",
+            "type": "string"
+        },
+        {
+            "name": "target_outbound_domain",
+            "type": "string"
+        },
+        {
+            "name": "target_outbound_user_name",
+            "type": "string"
+        },
+        {
+            "name": "target_process",
+            "type": "string"
+        },
+        {
+            "name": "target_process_guid",
+            "type": "string"
+        },
+        {
+            "name": "target_process_id",
+            "type": "string"
+        },
+        {
+            "name": "target_process_path",
+            "type": "string"
+        },
+        {
+            "name": "target_server_name",
+            "type": "string"
+        },
+        {
+            "name": "target_sid",
+            "type": "string"
+        },
+        {
+            "name": "target_type",
+            "type": "string"
+        },
+        {
+            "name": "target_user_name",
+            "type": "string"
+        },
+        {
+            "name": "target_user_sid",
+            "type": "string"
+        },
+        {
+            "name": "task",
+            "type": "string"
+        },
+        {
+            "name": "task_name",
+            "type": "string"
+        },
+        {
+            "name": "template_id",
+            "type": "string"
+        },
+        {
+            "name": "tenant_guid",
+            "type": "string"
+        },
+        {
+            "name": "terminal_session_id",
+            "type": "string"
+        },
+        {
+            "name": "threat_campaign",
+            "type": "string"
+        },
+        {
+            "name": "threat_category",
+            "type": "string"
+        },
+        {
+            "name": "threat_city",
+            "type": "string"
+        },
+        {
+            "name": "threat_domain",
+            "type": "string"
+        },
+        {
+            "name": "threat_id",
+            "type": "string"
+        },
+        {
+            "name": "threat_ip4",
+            "type": "string"
+        },
+        {
+            "name": "threat_ip6",
+            "type": "string"
+        },
+        {
+            "name": "threat_message",
+            "type": "string"
+        },
+        {
+            "name": "threat_name",
+            "type": "string"
+        },
+        {
+            "name": "threat_origin",
+            "type": "string"
+        },
+        {
+            "name": "threat_payload",
+            "type": "string"
+        },
+        {
+            "name": "threat_percent_block",
+            "type": "string"
+        },
+        {
+            "name": "threat_phase",
+            "type": "string"
+        },
+        {
+            "name": "threat_score",
+            "type": "string"
+        },
+        {
+            "name": "threat_status",
+            "type": "string"
+        },
+        {
+            "name": "threat_type",
+            "type": "string"
+        },
+        {
+            "name": "transmitted_services",
+            "type": "string"
+        },
+        {
+            "name": "truncated_message",
+            "type": "string"
+        },
+        {
+            "name": "tunnel_id",
+            "type": "int"
+        },
+        {
+            "name": "tunnel_type",
+            "type": "string"
+        },
+        {
+            "name": "uri",
+            "type": "string"
+        },
+        {
+            "name": "url",
+            "type": "string"
+        },
+        {
+            "name": "url_category",
+            "type": "string"
+        },
+        {
+            "name": "url_class",
+            "type": "string"
+        },
+        {
+            "name": "usb_serial_number",
+            "type": "string"
+        },
+        {
+            "name": "usb_bsd",
+            "type": "string"
+        },
+        {
+            "name": "usb_product_name",
+            "type": "string"
+        },
+        {
+            "name": "usb_vendor_name",
+            "type": "string"
+        },
+        {
+            "name": "usb_is_removable",
+            "type": "boolean"
+        },
+        {
+            "name": "usb_is_writable",
+            "type": "boolean"
+        },
+        {
+            "name": "usb_device_class",
+            "type": "string"
+        },
+        {
+            "name": "usb_port",
+            "type": "int"
+        },
+        {
+            "name": "user",
+            "type": "string"
+        },
+        {
+            "name": "user_agent",
+            "type": "string"
+        },
+        {
+            "name": "user_city",
+            "type": "string"
+        },
+        {
+            "name": "user_domain",
+            "type": "string"
+        },
+        {
+            "name": "user_email",
+            "type": "string"
+        },
+        {
+            "name": "user_group",
+            "type": "string"
+        },
+        {
+            "name": "user_id",
+            "type": "string"
+        },
+        {
+            "name": "user_mail",
+            "type": "string"
+        },
+        {
+            "name": "user_name",
+            "type": "string"
+        },
+        {
+            "name": "user_role",
+            "type": "string"
+        },
+        {
+            "name": "user_sid",
+            "type": "string"
+        },
+        {
+            "name": "user_title",
+            "type": "string"
+        },
+        {
+            "name": "user_type",
+            "type": "string"
+        },
+        {
+            "name": "vendor",
+            "type": "string"
+        },
+        {
+            "name": "version",
+            "type": "string"
+        },
+        {
+            "name": "virtual_account",
+            "type": "string"
+        },
+        {
+            "name": "vm_name",
+            "type": "string"
+        },
+        {
+            "name": "vuln_cve_id",
+            "type": "string"
+        },
+        {
+            "name": "vuln_cvss",
+            "type": "int"
+        },
+        {
+            "name": "vuln_cvss3",
+            "type": "int"
+        },
+        {
+            "name": "vulnerability_impact",
+            "type": "string"
+        },
+        {
+            "name": "vulnerability_mitigation",
+            "type": "string"
+        },
+        {
+            "name": "vulnerability_scan",
+            "type": "string"
+        },
+        {
+            "name": "winlog_channel",
+            "type": "string"
+        },
+        {
+            "name": "wmi_namespace",
+            "type": "string"
+        },
+        {
+            "name": "wmi_operation",
+            "type": "string"
+        },
+        {
+            "name": "wmi_process_id",
+            "type": "string"
+        },
+        {
+            "name": "wmi_query",
+            "type": "string"
+        },
+        {
+            "name": "x_forwarded_for",
+            "type": "string"
+        }
+  ]
+}

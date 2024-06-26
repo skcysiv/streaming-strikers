@@ -1,0 +1,17 @@
+topic:
+  name: events-topic
+
+server:
+  port: 8181
+
+
+spring:
+  kafka:
+    bootstrap-servers: "kafka:9092"
+    producer:
+      keySerializer: "org.apache.kafka.common.serialization.StringSerializer"
+      valueSerializer: "com.common.serialization.AvroSerializer"
+      properties:
+        schema:
+          registry:
+            url: "http://schema-registry:8081"

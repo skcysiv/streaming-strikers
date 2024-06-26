@@ -21,6 +21,7 @@ import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.streaming.api.operators.AbstractStreamOperator;
 import org.apache.flink.streaming.api.operators.OneInputStreamOperator;
 import org.apache.flink.streaming.runtime.streamrecord.StreamRecord;
+import org.apache.flink.streaming.siddhi.SiddhiCEPConfig;
 import org.apache.flink.streaming.siddhi.control.ControlEvent;
 import org.apache.flink.streaming.siddhi.control.MetadataControlEvent;
 import org.apache.flink.streaming.siddhi.control.OperationControlEvent;
@@ -46,8 +47,13 @@ public class AddRouteOperator extends AbstractStreamOperator<Tuple2<StreamRoute,
 
     private Map<String, SiddhiStreamSchema<?>> dataStreamSchemas;
 
-    public AddRouteOperator(Map<String, SiddhiStreamSchema<?>> dataStreamSchemas) {
+    private SiddhiCEPConfig siddhiCEPConfig;
+
+    private final Map<String, Long> controlEventToPartitionMap = new HashMap<>();
+
+    public AddRouteOperator(Map<String, SiddhiStreamSchema<?>> dataStreamSchemas, SiddhiCEPConfig siddhiCEPConfig) {
         this.dataStreamSchemas = new HashMap<>(dataStreamSchemas);
+        this.siddhiCEPConfig = siddhiCEPConfig;
     }
 
     @Override
@@ -55,19 +61,70 @@ public class AddRouteOperator extends AbstractStreamOperator<Tuple2<StreamRoute,
         StreamRoute streamRoute = element.getValue().f0;
         Object value = element.getValue().f1;
         if (value instanceof ControlEvent) {
-            streamRoute.setBroadCastPartitioning(true);
-            if (value instanceof OperationControlEvent) {
-                handleOperationControlEvent((OperationControlEvent)value);
-            } else if (value instanceof MetadataControlEvent) {
-                handleMetadataControlEvent((MetadataControlEvent)value);
+            if(siddhiCEPConfig.isRuleBasedPartitioning() && ((ControlEvent) value).getSendToPartitionNumber() != -1){
+                streamRoute.setPartitionKey(((ControlEvent) value).getSendToPartitionNumber());
             }
-
-            output.collect(element);
+            if(!siddhiCEPConfig.isRuleBasedPartitioning()) {
+                streamRoute.setBroadCastPartitioning(true);
+            }
+            if (value instanceof OperationControlEvent) {
+                OperationControlEvent operationControlEvent = (OperationControlEvent) value;
+                handleOperationControlEvent(operationControlEvent);
+                if(siddhiCEPConfig.isRuleBasedPartitioning()) {
+                    if(operationControlEvent.getSendToPartitionNumber() == -1) {
+                        streamRoute.setPartitionKey(operationControlEvent.getQueryId().hashCode());
+                    } else {
+                        streamRoute.setPartitionKey(operationControlEvent.getSendToPartitionNumber());
+                        controlEventToPartitionMap.put(operationControlEvent.getQueryId(), operationControlEvent.getSendToPartitionNumber());
+                    }
+                }
+                output.collect(element);
+            } else if (value instanceof MetadataControlEvent) {
+                MetadataControlEvent metadataControlEvent = (MetadataControlEvent) value;
+                handleMetadataControlEvent(metadataControlEvent);
+                // considering there is only one entry
+                if(siddhiCEPConfig.isRuleBasedPartitioning()){
+                    if(metadataControlEvent.getSendToPartitionNumber() == -1) {
+                        for (Map.Entry<String, String> entry : metadataControlEvent.getAddedExecutionPlanMap().entrySet()) {
+                            streamRoute.setPartitionKey(entry.getKey().hashCode());
+                            output.collect(element);
+                        }
+                        for (Map.Entry<String, String> entry : metadataControlEvent.getUpdatedExecutionPlanMap().entrySet()) {
+                            streamRoute.setPartitionKey(entry.getKey().hashCode());
+                            output.collect(element);
+                        }
+                        for (String entry : metadataControlEvent.getDeletedExecutionPlanId()) {
+                            streamRoute.setPartitionKey(entry.hashCode());
+                            output.collect(element);
+                        }
+                    } else {
+                        for (Map.Entry<String, String> entry : metadataControlEvent.getAddedExecutionPlanMap().entrySet()) {
+                            streamRoute.setPartitionKey(metadataControlEvent.getSendToPartitionNumber());
+                            controlEventToPartitionMap.put(entry.getKey(), metadataControlEvent.getSendToPartitionNumber());
+                            output.collect(element);
+                        }
+                        for (Map.Entry<String, String> entry : metadataControlEvent.getUpdatedExecutionPlanMap().entrySet()) {
+                            streamRoute.setPartitionKey(metadataControlEvent.getSendToPartitionNumber());
+                            controlEventToPartitionMap.put(entry.getKey(), metadataControlEvent.getSendToPartitionNumber());
+                            output.collect(element);
+                        }
+                        for (String entry : metadataControlEvent.getDeletedExecutionPlanId()) {
+                            streamRoute.setPartitionKey(metadataControlEvent.getSendToPartitionNumber());
+                            controlEventToPartitionMap.put(entry, metadataControlEvent.getSendToPartitionNumber());
+                            output.collect(element);
+                        }
+                    }
+                }
+                else {
+                    output.collect(element);
+                }
+            }
         } else {
             String inputStreamId = streamRoute.getInputStreamId();
             if (!inputStreamToExecutionPlans.containsKey(inputStreamId)) {
                 return;
             }
+            HashSet<Long> eventSentToPartitions = new HashSet<>();
 
             for (String executionPlanId : inputStreamToExecutionPlans.get(inputStreamId)) {
                 if (!executionPlanEnabled.get(executionPlanId)) {
@@ -80,17 +137,29 @@ public class AddRouteOperator extends AbstractStreamOperator<Tuple2<StreamRoute,
                 SiddhiStreamSchema<Object> schema = (SiddhiStreamSchema<Object>)dataStreamSchemas.get(inputStreamId);
                 String[] fieldNames = schema.getFieldNames();
                 Object[] row = schema.getStreamSerializer().getRow(value);
-                streamRoute.setPartitionKey(-1);
-                for (String partitionKey : partitionKeys) {
-                    long partitionValue = 0;
-                    for (int i = 0; i < fieldNames.length; ++i) {
-                        if (partitionKey.equals(fieldNames[i])) {
-                            partitionValue += row[i].hashCode();
-                        }
+                if(siddhiCEPConfig.isRuleBasedPartitioning()){
+                    Long slot = controlEventToPartitionMap.get(executionPlanId);
+                    if(controlEventToPartitionMap.containsKey(executionPlanId)){
+                        slot = controlEventToPartitionMap.get(executionPlanId);
                     }
-                    streamRoute.setPartitionKey(Math.abs(partitionValue));
+                    if (eventSentToPartitions.contains(slot)){
+                        continue;
+                    }
+                    eventSentToPartitions.add(slot);
+                    streamRoute.setPartitionKey(slot);
                 }
-
+                else {
+                    streamRoute.setPartitionKey(-1);
+                    for (String partitionKey : partitionKeys) {
+                        long partitionValue = 0;
+                        for (int i = 0; i < fieldNames.length; ++i) {
+                            if (partitionKey.equals(fieldNames[i])) {
+                                partitionValue += row[i].hashCode();
+                            }
+                        }
+                        streamRoute.setPartitionKey(Math.abs(partitionValue));
+                    }
+                }
                 streamRoute.addExecutionPlanId(executionPlanId);
                 output.collect(element);
             }
@@ -158,7 +227,7 @@ public class AddRouteOperator extends AbstractStreamOperator<Tuple2<StreamRoute,
 
     private void handleExecutionPlan(String executionPlanId, String executionPlan) throws Exception {
         Map<String, SiddhiExecutionPlanner.StreamPartition> streamPartitions =
-            SiddhiExecutionPlanner.of(dataStreamSchemas, executionPlan).getStreamPartitions();
+                SiddhiExecutionPlanner.of(dataStreamSchemas, executionPlan).getStreamPartitions();
 
         for (String inputStreamId : streamPartitions.keySet()) {
             if (!inputStreamToExecutionPlans.containsKey(inputStreamId)) {

@@ -26,6 +26,8 @@ public abstract class ControlEvent implements Serializable {
     private Date expiredTime;
     private boolean expired;
 
+    private long sendToPartitionNumber = -1;
+
     public String getName() {
         return this.getClass().getSimpleName();
     }
@@ -45,5 +47,21 @@ public abstract class ControlEvent implements Serializable {
     public void expire() {
         this.expired = true;
         this.expiredTime = new Date();
+    }
+
+    public void setExpiredTime(Date expiredTime) {
+        this.expiredTime = expiredTime;
+    }
+
+    public void setExpired(boolean expired) {
+        this.expired = expired;
+    }
+
+    public long getSendToPartitionNumber() {
+        return sendToPartitionNumber;
+    }
+
+    public void setSendToPartitionNumber(long sendToPartitionNumber) {
+        this.sendToPartitionNumber = sendToPartitionNumber;
     }
 }
